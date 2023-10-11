@@ -44,11 +44,11 @@ class GetAttendance extends Command
 
         if($attendance == null)
         {
-            $attendances = vms::get();
+            $attendances = vms::orderBy('date_time','asc')->get();
         }
         else
         {
-            $attendances = vms::where('id','>',$attendance->last_id);
+            $attendances = vms::where('id','>',$attendance->last_id)->orderBy('date_time','asc')->get();
         }
         
         foreach($attendances as $att)
@@ -62,6 +62,7 @@ class GetAttendance extends Command
                     $attendance->employee_code  = $att->card;   
                     $attendance->time_in = date('Y-m-d H:i:s',strtotime($att->date_time));
                     $attendance->device_in = $att->serial_number;
+                    $attendance->last_id = $att->id;
                     $attendance->save();
                 }
             }
@@ -88,6 +89,7 @@ class GetAttendance extends Command
                     $attendance->employee_code  = $att->card;   
                     $attendance->time_out = date('Y-m-d H:i:s', strtotime($att->date_time));
                     $attendance->device_out = $att->serial_number;
+                    $attendance->last_id = $att->id;
                     $attendance->save(); 
                 }
 
