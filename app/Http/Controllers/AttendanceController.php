@@ -32,6 +32,7 @@ class AttendanceController extends Controller
                     $attendance->employee_code  = $att->card;   
                     $attendance->time_in = date('Y-m-d H:i:s',strtotime($att->date_time));
                     $attendance->device_in = $att->serial_number;
+                    $attendance->last_id = $att->id;
                     $attendance->save();
                 }
             }
@@ -58,6 +59,7 @@ class AttendanceController extends Controller
                     $attendance->employee_code  = $att->card;   
                     $attendance->time_out = date('Y-m-d H:i:s', strtotime($att->date_time));
                     $attendance->device_out = $att->serial_number;
+                    $attendance->last_id = $att->id;
                     $attendance->save(); 
                 }
 
