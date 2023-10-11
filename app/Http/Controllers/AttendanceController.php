@@ -14,11 +14,11 @@ class AttendanceController extends Controller
 
         if($attendance == null)
         {
-            $attendances = vms::get();
+            $attendances = vms::orderBy('date_time','asc')->get();
         }
         else
         {
-            $attendances = vms::where('id','>',$attendance->last_id);
+            $attendances = vms::where('id','>',$attendance->last_id)->orderBy('date_time','asc')->get();
         }
         
         foreach($attendances as $att)
