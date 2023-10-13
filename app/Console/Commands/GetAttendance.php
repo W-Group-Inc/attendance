@@ -44,11 +44,11 @@ class GetAttendance extends Command
 
         if($attendance == null)
         {
-            $attendances = vms::orderBy('date_time','asc')->get();
+            $attendances = vms::orderBy('id','asc')->get();
         }
         else
         {
-            $attendances = vms::where('id','>',$attendance->last_id)->orderBy('date_time','asc')->get();
+            $attendances = vms::where('id','>',$attendance->last_id)->orderBy('id','asc')->get();
         }
         
         foreach($attendances as $att)
