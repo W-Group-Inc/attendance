@@ -57,7 +57,7 @@ class GetAttendance extends Command
             {
                 if($att->device_name == "HO IN")
                 {
-                    $attend = Attendance::where('employee_code',$att->card)->whereDate('time_in',date('Y-m-d', strtotime($att->date_time)))->first();
+                    $attend = Attendance::where('employee_code',$att->card)->where('time_in',date('Y-m-d H:i:s', strtotime($att->date_time)))->first();
                     if($attend == null)
                     {
                         $attendance = new Attendance;
